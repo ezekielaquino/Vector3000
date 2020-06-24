@@ -3,15 +3,15 @@ export interface Coords {
   y: number
 }
 
-interface GetPerpendicularPoint {
-  point: Coords
-  angle: number
-  distance: number
-}
-
 interface GetVector {
   p1: Coords
   p2: Coords
+}
+
+interface GetAngle {
+  p1: Coords
+  p2: Coords
+  isRadians?: boolean
 }
 
 interface ExtendPointByVector {
@@ -25,25 +25,10 @@ interface ReflectPointThruLine {
   line: Coords[]
 }
 
-interface GetAngle {
-  p1: Coords
-  p2: Coords
-  isRadians?: boolean
-}
-
-export function getPerpendicularPoint(args: GetPerpendicularPoint): Coords {
-  const {
-    point,
-    angle,
-    distance,
-  } = args;
-  const x = point.x + Math.sin(angle) * distance;
-  const y =  point.y + Math.cos(angle) * distance;
-
-  return {
-    x,
-    y,
-  };
+interface GetPerpendicularPoint {
+  point: Coords
+  angle: number
+  distance: number
 }
 
 export function getVector(args: GetVector): Coords {
@@ -58,6 +43,19 @@ export function getVector(args: GetVector): Coords {
     x,
     y,
   };
+}
+
+export function getAngle(args: GetAngle): number {
+  const {
+    p1,
+    p2,
+    isRadians,
+  } = args;
+
+  return Math.atan2(
+    p2.y - p1.y,
+    p2.x - p1.x,
+  ) * (isRadians ? 1 : 180 / Math.PI);
 }
 
 export function extendPointByVector(args: ExtendPointByVector): Coords {
@@ -94,15 +92,17 @@ export function reflectPointThruLine(args: ReflectPointThruLine): Coords {
   };
 }
 
-export function getAngle(args: GetAngle): number {
+export function getPerpendicularPoint(args: GetPerpendicularPoint): Coords {
   const {
-    p1,
-    p2,
-    isRadians,
+    point,
+    angle,
+    distance,
   } = args;
+  const x = point.x + Math.sin(angle) * distance;
+  const y =  point.y + Math.cos(angle) * distance;
 
-  return Math.atan2(
-    p2.y - p1.y,
-    p2.x - p1.x,
-  ) * (isRadians ? 1 : 180 / Math.PI);
+  return {
+    x,
+    y,
+  };
 }
