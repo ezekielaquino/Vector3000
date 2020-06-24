@@ -14,6 +14,11 @@ interface GetAngle {
   isRadians?: boolean
 }
 
+interface GetMidpoint {
+  p1: Coords
+  p2: Coords
+}
+
 interface ExtendPointByVector {
   point: Coords
   vector: Coords
@@ -56,6 +61,21 @@ export function getAngle(args: GetAngle): number {
     p2.y - p1.y,
     p2.x - p1.x,
   ) * (isRadians ? 1 : 180 / Math.PI);
+}
+
+export function getMidpoint(args: GetMidpoint): Coords {
+  const {
+    p1,
+    p2,
+  } = args;
+
+  const x = (p2.x + p1.x) / 2;
+  const y = (p2.y + p1.y) / 2;
+
+  return {
+    x,
+    y,
+  };
 }
 
 export function extendPointByVector(args: ExtendPointByVector): Coords {
