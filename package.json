@@ -1,8 +1,24 @@
 {
   "name": "vector3000",
   "description": "Ezekiel's personal toolkit for making things with vectors",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "main": "index.ts",
   "author": "Ezekiel Aquino",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezekielaquino/Vector3000.git"
+  },
+  "keywords": [
+    "vector",
+    "math",
+    "tools"
+  ],
+  "bugs": {
+    "url": "https://github.com/ezekielaquino/Vector3000/issues"
+  },
+  "homepage": "https://github.com/ezekielaquino/Vector3000#readme"
 }
