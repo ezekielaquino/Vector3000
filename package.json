@@ -1,7 +1,7 @@
 {
   "name": "vector3000",
   "description": "Ezekiel's personal toolkit for making things with vectors",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "index.ts",
   "author": "Ezekiel Aquino",
   "license": "MIT",

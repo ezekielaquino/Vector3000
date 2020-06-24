@@ -103,8 +103,8 @@ export function reflectPointThruLine(args: ReflectPointThruLine): Coords {
   const dy = p2.y - p1.y;
   const a = (dx * dx - dy * dy) / (dx * dx + dy * dy);
   const b = 2 * dx * dy / (dx * dx + dy * dy);
-  const x = Math.round(a * (origin.x - p1.x) + b * (origin.y - p1.y) + p1.x); 
-  const y = Math.round(b * (origin.x - p1.x) - a * (origin.y - p1.y) + p1.y);
+  const x = a * (origin.x - p1.x) + b * (origin.y - p1.y) + p1.x; 
+  const y = b * (origin.x - p1.x) - a * (origin.y - p1.y) + p1.y;
 
   return {
     x,
