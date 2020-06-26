@@ -25,6 +25,11 @@ interface ExtendPointByVector {
   distance: number
 }
 
+interface GetIntersection {
+  lineA: Coords[]
+  lineB: Coords[]
+}
+
 interface ReflectPointThruLine {
   origin: Coords
   line: Coords[]
@@ -90,6 +95,35 @@ export function extendPointByVector(args: ExtendPointByVector): Coords {
   return {
     x,
     y,
+  };
+}
+
+// Paul Bourke
+export function getIntersection(args: GetIntersection): Coords | boolean {
+  const {
+    lineA,
+    lineB,
+  } = args;
+  const [ p1, p2 ] = lineA;
+  const [ p3, p4 ] = lineB;
+  const denominator = (p4.y - p3.y) * (p2.x - p1.x) - (p4.x - p3.x) * (p2.y - p1.y);
+  const ua = ((p4.x - p3.x) * (p1.y - p3.y) - (p4.y - p3.y) * (p1.x - p3.x)) / denominator;
+  const ub = ((p2.x - p1.x) * (p1.y - p3.y) - (p2.y - p1.y) * (p1.x - p3.x)) / denominator;
+
+  if (
+    (p1.x === p2.x && p1.y === p2.y) || 
+    (p3.x === p4.x && p3.y === p4.y)
+  ) {
+    return false;
+  }
+
+  if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
+    return false;
+  }
+
+  return {
+    x: p1.x + ua * (p2.x - p1.x),
+    y: p1.y + ua * (p2.y - p1.y),
   };
 }
 
