@@ -163,8 +163,8 @@ export function getPerpendicularPoint(args: GetPerpendicularPoint): Coords {
 
 export function add(pointA: Coords, pointB: Coords): Coords {
   return {
-    x: pointA.x + pointB.x,
-    y: pointA.y + pointB.y,
+    x: pointB.x + pointA.x,
+    y: pointB.y + pointA.y,
   };
 }
 
@@ -177,7 +177,14 @@ export function subtract(pointA: Coords, pointB: Coords): Coords {
 
 export function multiply(pointA: Coords, pointB: Coords): Coords {
   return {
-    x: pointB.x - pointA.x,
-    y: pointB.y - pointA.y,
+    x: pointB.x * pointA.x,
+    y: pointB.y * pointA.y,
+  };
+}
+
+export function divide(pointA: Coords, pointB: Coords): Coords {
+  return {
+    x: pointB.x / pointA.x,
+    y: pointB.y / pointA.y,
   };
 }
