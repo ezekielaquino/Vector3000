@@ -3,42 +3,47 @@ export interface Coords {
   y: number
 }
 
-interface GetVector {
+export interface GetVector {
   p1: Coords
   p2: Coords
 }
 
-interface GetAngle {
+export interface GetAngle {
   p1: Coords
   p2: Coords
   isRadians?: boolean
 }
 
-interface GetMidpoint {
+export interface GetMidpoint {
   p1: Coords
   p2: Coords
 }
 
-interface ExtendPointByVector {
+export interface ExtendPointByVector {
   point: Coords
   vector: Coords
   distance: number
 }
 
-interface GetIntersection {
+export interface GetIntersection {
   lineA: Coords[]
   lineB: Coords[]
 }
 
-interface ReflectPointThruLine {
+export interface ReflectPointThruLine {
   origin: Coords
   line: Coords[]
 }
 
-interface GetPerpendicularPoint {
+export interface GetPerpendicularPoint {
   point: Coords
   angle: number
   distance: number
+}
+
+export interface GetDistance {
+  p1: Coords;
+  p2: Coords;
 }
 
 export function getVector(args: GetVector): Coords {
@@ -99,7 +104,7 @@ export function extendPointByVector(args: ExtendPointByVector): Coords {
 }
 
 // Paul Bourke
-export function getIntersection(args: GetIntersection): Coords | boolean {
+export function getIntersection(args: GetIntersection): Coords | undefined {
   const {
     lineA,
     lineB,
@@ -114,11 +119,11 @@ export function getIntersection(args: GetIntersection): Coords | boolean {
     (p1.x === p2.x && p1.y === p2.y) || 
     (p3.x === p4.x && p3.y === p4.y)
   ) {
-    return false;
+    return undefined;
   }
 
   if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
-    return false;
+    return undefined;
   }
 
   return {
@@ -187,4 +192,9 @@ export function divide(pointA: Coords, pointB: Coords): Coords {
     x: pointB.x / pointA.x,
     y: pointB.y / pointA.y,
   };
+}
+
+export function getDistance(args: GetDistance): number {
+  const { p1, p2 } = args;
+  return Math.hypot(p2.x - p1.x, p2.y - p1.y);
 }
